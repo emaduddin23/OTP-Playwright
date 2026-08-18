@@ -5,6 +5,10 @@ const { ConsultantPage } = require('../pages/ConsultantPage');
 const MailosaurClient = require('mailosaur');
 
 test.describe('UAPP Consultant Creation with Mailosaur Verification', () => {
+  const apiKey = process.env.MAILOSAUR_API_KEY;
+  const serverId = process.env.MAILOSAUR_SERVER_ID;
+  test.skip(!apiKey || !serverId, 'Mailosaur API Key and Server ID must be configured to run this test.');
+
   test('should log in, create a consultant, retrieve login credentials from email, and log in as the new consultant', async ({ page, browser }) => {
     test.setTimeout(90000); // Allow up to 90 seconds for UAPP email delivery and retrieval
 
@@ -13,13 +17,7 @@ test.describe('UAPP Consultant Creation with Mailosaur Verification', () => {
     const consultantPage = new ConsultantPage(page);
 
     // Setup Mailosaur configuration
-    const apiKey = process.env.MAILOSAUR_API_KEY;
-    const serverId = process.env.MAILOSAUR_SERVER_ID;
     const domain = process.env.MAILOSAUR_DOMAIN;
-
-    if (!apiKey || !serverId) {
-      throw new Error('Mailosaur API Key and Server ID must be configured in .env to run this test.');
-    }
 
     const mailosaur = new MailosaurClient(apiKey);
     const emailDomain = domain ? (domain.includes('@') ? domain.substring(domain.indexOf('@') + 1) : domain) : `${serverId}.mailosaur.net`;
