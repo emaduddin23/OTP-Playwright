@@ -14,7 +14,7 @@ module.exports = defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    headless: false, // Default to headed to let the user see execution or record it
+    headless: !!process.env.CI, // Run headless in CI (GitHub Actions) but headed locally
   },
   projects: [
     {
