@@ -1,6 +1,7 @@
 // @ts-check
 require('dotenv').config();
 const { defineConfig, devices } = require('@playwright/test');
+const isCI = !!process.env.CI || process.env.GITHUB_ACTIONS === 'true';
 
 module.exports = defineConfig({
   testDir: './tests',
@@ -14,7 +15,7 @@ module.exports = defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    headless: !!process.env.CI, // Run headless in CI (GitHub Actions) but headed locally
+    headless: isCI, // Run headless in CI (GitHub Actions) but headed locally
   },
   projects: [
     {
