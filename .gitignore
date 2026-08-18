@@ -1,0 +1,16 @@
+# Credentials and Environment
+.env
+
+# Dependencies
+node_modules/
+
+# Playwright Test Outputs
+test-results/
+playwright-report/
+blob-report/
+playwright/.local-browsers/
+.playwright/
+.playwright-mcp/
+
+# OS metadata
+.DS_Store
