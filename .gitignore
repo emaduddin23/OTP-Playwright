@@ -14,3 +14,7 @@ playwright/.local-browsers/
 
 # OS metadata
 .DS_Store
+
+# JSON files
+*.json
+
